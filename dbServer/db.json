@@ -3,7 +3,7 @@
     {
       "id": 1,
       "username": "admin",
-      "password": 123456,
+      "password": "123456",
       "roleState": true,
       "default": true,
       "region": "",
