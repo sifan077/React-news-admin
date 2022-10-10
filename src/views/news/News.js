@@ -23,7 +23,7 @@ function News(props) {
                         {
                             list.map(item => {
                                 return (<Col span={8} key={item[0]}>
-                                    <Card title="Card title" bordered={true} hoverable={true}>
+                                    <Card title={item[0]} bordered={true} hoverable={true}>
                                         <List
                                             size="small"
                                             dataSource={item[1]}
