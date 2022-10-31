@@ -2,10 +2,10 @@
   主页的路由组件
 */
 
-import React, {useState, useEffect, useRef} from "react";
-import {NavLink} from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
+import { NavLink } from "react-router-dom";
 import axios from "axios";
-import {Card, Row, Col, Avatar, List, Drawer} from "antd";
+import { Card, Row, Col, Avatar, List, Drawer } from "antd";
 import {
     EditOutlined,
     EllipsisOutlined,
@@ -14,7 +14,7 @@ import {
 import * as echarts from "echarts";
 import _ from "lodash";
 
-const {Meta} = Card;
+const { Meta } = Card;
 
 export default function Home() {
     const [viewList, setviewList] = useState([]);
@@ -27,7 +27,7 @@ export default function Home() {
     const {
         username,
         region,
-        role: {roleName}
+        role: { roleName }
     } = JSON.parse(localStorage.getItem("token"));
 
     //获取浏览数量最多的前6条数据
@@ -189,34 +189,34 @@ export default function Home() {
                             <PieChartOutlined
                                 key="pie"
                                 onClick={() => {
-                                    setTimeout(() => {
-                                        setVisible(true);
+                                    setVisible(true);
+                                    axios.get("/").then(() => {
                                         renderPieView();
-                                    }, 0);
-                                }}/>,
+                                    });
+                                }} />,
                             <EditOutlined onClick={() => {
                                 alert("别点我，没写编辑功能")
-                            }} key="edit"/>,
+                            }} key="edit" />,
                             <EllipsisOutlined onClick={() => {
                                 alert("别点我，没写更多功能")
-                            }} key="ellipsis"/>
+                            }} key="ellipsis" />
                         ]}>
                         <Meta
                             avatar={
-                                <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"/>
+                                <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
                             }
                             title={username}
                             description={
                                 <>
-                                    <b style={{fontSize: 16, marginRight: 20}}>
+                                    <b style={{ fontSize: 16, marginRight: 20 }}>
                                         {region ? region : "全球"}
                                     </b>
                                     <span>{roleName}</span>
-                                </>}/>
+                                </>} />
                     </Card>
                 </Col>
             </Row>
-            <div ref={barRef} style={{width: "100%", height: 400, marginTop: 50}}/>
+            <div ref={barRef} style={{ width: "100%", height: 400, marginTop: 50 }} />
             <Drawer
                 width="500px"
                 title="用户新闻分类"
@@ -225,7 +225,7 @@ export default function Home() {
                 onClose={() => setVisible(false)}
                 visible={visible}
             >
-                <div ref={pieRef} style={{width: "100%", height: 400}}/>
+                <div ref={pieRef} style={{ width: "100%", height: 400 }} />
             </Drawer>
         </div>);
 }
