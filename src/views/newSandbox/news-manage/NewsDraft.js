@@ -7,11 +7,11 @@ import {
     UploadOutlined
 } from '@ant-design/icons';
 import axios from "axios";
-import {useNavigate} from "react-router";
+import {useNavigate} from "react-router-dom";
 
 const {confirm} = Modal;
 
-function NewsDraft(props) {
+function NewsDraft() {
     const navigate = useNavigate();
     const [dataSource, setDataSource] = useState([]);
     const {username} = JSON.parse(localStorage.getItem("token"));
@@ -28,38 +28,29 @@ function NewsDraft(props) {
             okText: '确定',
             cancelText: '取消',
             icon: <ExclamationCircleOutlined/>,
-            // content: 'Some descriptions',
-
             onOk() {
-                // console.log('OK');
                 deleteMethod(item);
             },
-
             onCancel() {
-                // console.log('Cancel');
-                console.log("取消删除了");
             },
         });
-    }
+    };
 
     const deleteMethod = (item) => {
-        // 当前页面同步状态 + 后端同步
         axios.delete(`/news/${item.id}`);
         setDataSource(dataSource.filter(data => data.id !== item.id));
-    }
+    };
 
     const handleCheck = (value) => {
-        axios.patch(`/news/${value}`, {auditState: 1}).then(res => {
-            // 跳转到审核列表
+        axios.patch(`/news/${value}`, {auditState: 1}).then(() => {
             navigate("/audit-manage/list");
-            // 通知用户
             notification.info({
                 message: `通知`,
                 description: `您可以到审核管理中查看新闻`,
                 placement: "bottomRight",
             });
         });
-    }
+    };
 
 
     const columns = [

@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {Layout, Menu} from "antd";
 import {
-    UserOutlined,
-    HomeOutlined,
     CrownOutlined,
+    HomeOutlined,
+    UserOutlined,
 } from '@ant-design/icons';
-import {useNavigate, useLocation} from "react-router";
+import {useLocation, useNavigate} from "react-router-dom";
 
 import './SideMenu.css'
 import axios from "axios";
@@ -13,21 +13,19 @@ import axios from "axios";
 const {Sider} = Layout;
 const {SubMenu} = Menu;
 
-
-function SideMenu(props) {
+function SideMenu() {
     const location = useLocation();
     const selectKeys = [location.pathname];
     const openKeys = ["/" + location.pathname.split("/")[1]];
     const [menu, setMenu] = useState([]);
     const [collapsed, setCollapsed] = useState(false);
     const navigate = useNavigate();
+
     useEffect(() => {
         axios.get("/rights?_embed=children").then(res => {
-                // console.log(res.data);
-                setMenu(res.data);
-            }
-        );
-    }, [navigate]);
+            setMenu(res.data);
+        });
+    }, []);
 
     const users = localStorage.getItem("token");
 
@@ -69,24 +67,22 @@ function SideMenu(props) {
 
     return (
         <Sider trigger={null} collapsible collapsed={collapsed}>
-            <div style={{display: "flex", height: "100%", "flexDirection": "column"}}>
-                <div className="logo" onClick={() => {
-                    setCollapsed(!collapsed)
-                }}>全球新闻发布管理系统
+            <div style={{display: "flex", height: "100%", flexDirection: "column"}}>
+                <div className="logo" onClick={() => setCollapsed(!collapsed)}>
+                    全球新闻发布管理系统
                 </div>
-                <div style={{flex: 1, "overflow": "auto"}}>
+                <div style={{flex: 1, overflow: "auto"}}>
                     <Menu
                         theme="dark"
                         mode="inline"
                         selectedKeys={selectKeys}
-                        defaultOpenKeys={openKeys}>
+                        defaultOpenKeys={openKeys}
+                    >
                         {renderMenu(menu)}
                     </Menu>
                 </div>
-
             </div>
         </Sider>
-
     );
 }
 

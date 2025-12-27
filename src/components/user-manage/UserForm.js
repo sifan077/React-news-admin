@@ -74,8 +74,11 @@ const UserForm = forwardRef((props, ref) => {
                     <Input/>
                 </Form.Item>
 
-                <Form.Item name="password" label="密码"
-                           rrules={[{required: true, message: '请输入密码'}]}>
+                <Form.Item
+                    name="password"
+                    label="密码"
+                    rules={[{required: true, message: '请输入密码'}]}
+                >
                     <Input type="password"/>
                 </Form.Item>
                 {/*通过禁用状态设置是否可选中*/}
@@ -83,9 +86,16 @@ const UserForm = forwardRef((props, ref) => {
                            rules={idDisabled ? [] : [{required: true, message: '请选择区域'}]}>
                     <Select style={{width: 120}} disabled={idDisabled}>
                         {
-                            props.regionList.map((item, index) => {
-                                return <Option key={index} value={item.value}
-                                               disabled={checkRegionDisabled(item.value)}>{item.tittle}</Option>
+                            props.regionList.map((item) => {
+                                return (
+                                    <Option
+                                        key={item.value}
+                                        value={item.value}
+                                        disabled={checkRegionDisabled(item.value)}
+                                    >
+                                        {item.title}
+                                    </Option>
+                                );
                             })
                         }
                     </Select>
@@ -94,18 +104,12 @@ const UserForm = forwardRef((props, ref) => {
                            rules={[{required: true, message: '请选择角色'}]}>
                     <Select style={{width: 120}}
                             onChange={(value) => {
-                                // console.log(value);
-                                // console.log(typeof value);
-                                // console.log(value === 1);
                                 if (value === 1) {
-                                    //如果是超级管理员，就不可以选择
                                     setIsDisabled(true);
-                                    // 给表单设置默认值
                                     ref.current.setFieldsValue({
                                         region: ""
                                     });
                                 } else {
-                                    // 如果不是超级管理员，就可以选择
                                     setIsDisabled(false);
                                 }
                             }}>

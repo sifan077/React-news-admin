@@ -3,19 +3,15 @@ import {Button, Form, Input, message} from 'antd';
 
 import {UserOutlined, LockOutlined} from "@ant-design/icons";
 
-import {useNavigate} from "react-router";
+import {useNavigate} from "react-router-dom";
 import './Login.css';
 import axios from "axios";
 
-
-function Login(props) {
+function Login() {
     const navigate = useNavigate();
-    const onFinish = (from) => {
-        console.log(from);
-        axios.get("/users?username=" + from.username
-            + "&password=" + from.password + "&roleState=true&_expand=role")
+    const onFinish = (formValues) => {
+        axios.get(`/users?username=${formValues.username}&password=${formValues.password}&roleState=true&_expand=role`)
             .then(res => {
-                // console.log(res.data);
                 if (res.data.length > 0) {
                     localStorage.setItem("token", JSON.stringify(res.data[0]));
                     navigate("/home");

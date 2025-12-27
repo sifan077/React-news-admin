@@ -1,24 +1,22 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, notification, Table, Tag} from "antd";
 import axios from "axios";
-import {useNavigate} from "react-router";
+import {useNavigate} from "react-router-dom";
 
-function AuditList(props) {
+function AuditList() {
     const navigate = useNavigate();
     const {username} = JSON.parse(localStorage.getItem('token'));
-    const [dataSource, setDataSource] = React.useState([]);
+    const [dataSource, setDataSource] = useState([]);
     useEffect(() => {
         axios.get(`/news?author=${username}&auditState_ne=0&publishState_lte=1&_expand=category`)
             .then(res => {
-                // console.log(res.data);
                 setDataSource(res.data);
             });
 
     }, [username]);
     const handleCancel = (item) => {
-        // 前端页面的删除
         setDataSource(dataSource.filter(data => data.id !== item.id));
-        axios.patch(`/news/${item.id}`, {auditState: 0}).then(res => {
+        axios.patch(`/news/${item.id}`, {auditState: 0}).then(() => {
             navigate('/news-manage/draft');
             notification.info({
                 message: `通知`,
@@ -26,17 +24,17 @@ function AuditList(props) {
                 placement: "bottomRight",
             });
         });
+    };
 
-    }
     const handleUpdate = (item) => {
         navigate(`/news-manage/update/${item.id}`);
-        // props.history.push(`/news-manage/update/${item.id}`);
-    }
+    };
+
     const handleRelease = (item) => {
         axios.patch(`/news/${item.id}`, {
             publishState: 2,
             publishTime: Date.now()
-        }).then(res => {
+        }).then(() => {
             navigate('/publish-manage/published');
             notification.info({
                 message: `通知`,
@@ -44,8 +42,7 @@ function AuditList(props) {
                 placement: "bottomRight",
             });
         });
-
-    }
+    };
 
 
     const columns = [

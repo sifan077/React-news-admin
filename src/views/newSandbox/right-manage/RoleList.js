@@ -30,13 +30,10 @@ function RoleList(props) {
             // content: 'Some descriptions',
 
             onOk() {
-                // console.log('OK');
                 deleteMethod(item);
             },
 
             onCancel() {
-                // console.log('Cancel');
-                console.log("取消删除了");
             },
         });
     }
@@ -89,7 +86,6 @@ function RoleList(props) {
         // 获取数据源
         axios.get("/roles").then(res => {
             const list = res.data;
-            // console.log(list);
             setDataSource(list);
         });
     }, []);
@@ -98,7 +94,6 @@ function RoleList(props) {
         // 获取权限数据源
         axios.get("/rights?_embed=children").then(res => {
             const list = res.data;
-            // console.log(list);
             setRightList(list);
         });
     }, []);

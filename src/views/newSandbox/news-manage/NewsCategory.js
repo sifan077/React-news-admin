@@ -141,7 +141,6 @@ export default function NewsCategory() {
                 toggleEdit()
                 handleSave({...record, ...values})
             } catch (errInfo) {
-                console.log("Save failed:", errInfo)
             }
         }
         let childNode = children
