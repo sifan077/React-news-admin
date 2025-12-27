@@ -141,7 +141,10 @@ export default function NewsCategory() {
                 toggleEdit()
                 handleSave({...record, ...values})
             } catch (errInfo) {
-                console.log("Save failed:", errInfo)
+                Modal.error({
+                    title: "保存失败",
+                    content: "请检查输入内容是否符合要求",
+                })
             }
         }
         let childNode = children
