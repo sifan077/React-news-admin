@@ -8,10 +8,9 @@ import './Login.css';
 import axios from "axios";
 
 
-function Login(props) {
+function Login() {
     const navigate = useNavigate();
     const onFinish = (from) => {
-        console.log(from);
         axios.get("/users?username=" + from.username
             + "&password=" + from.password + "&roleState=true&_expand=role")
             .then(res => {

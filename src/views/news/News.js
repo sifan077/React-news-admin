@@ -3,14 +3,13 @@ import axios from "axios";
 import {Card, Col, List, PageHeader, Row} from "antd";
 import _ from "lodash";
 
-function News(props) {
+function News() {
     const [list, setList] = useState([]);
     useEffect(() => {
         axios.get("/news?publishState=2&_expand=category").then(res => {
-            // console.log(_.groupBy(res.data, item => item.category.title));
             setList(Object.entries((_.groupBy(res.data, item => item.category.title))));
         });
-    }, [])
+    }, []);
     return (
         <div style={{width: '95%', margin: '0 auto'}}>
             <PageHeader

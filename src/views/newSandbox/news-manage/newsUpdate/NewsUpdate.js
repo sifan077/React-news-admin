@@ -3,14 +3,14 @@ import {PageHeader, Steps, Button, Form, Input, Select, message, notification} f
 
 import style from './Newsupdate.module.css';
 import axios from "axios";
-import NewEditor from "../../../../compoments/news-manage/NewEditor";
+import NewEditor from "../../../../components/news-manage/NewEditor";
 import {useNavigate} from "react-router";
 import {useParams} from "react-router-dom";
 
 const {Step} = Steps;
 const {Option} = Select;
 
-function NewsUpdate(props) {
+function NewsUpdate() {
     // 路由跳转
     const navigate = useNavigate();
     // 当前是第几部的状态
@@ -40,18 +40,17 @@ function NewsUpdate(props) {
             });
             setContent(content);
         });
-    }, [params])
+    }, [params.id]);
 
     // 到下一步
     const handleNext = () => {
         if (current === 0) {
             // 检查表单时否填写完整
             NewsForm.current.validateFields().then(res => {
-                // console.log(res);
                 setFormInfo(res);
                 setCurrent(current + 1);
-            }).catch(err => {
-                console.log(err);
+            }).catch(() => {
+                message.error("请完善新闻标题和分类");
             });
         } else {
             // console.log(formInfo, content);

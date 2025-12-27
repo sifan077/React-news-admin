@@ -5,17 +5,15 @@ import axios from "axios";
 import moment from "moment";
 import {useNavigate} from "react-router";
 
-function NewsPreview(props) {
+function NewsPreview() {
     const navigate = useNavigate();
     const [newsInfo, setNewsInfo] = useState(null);
     const params = useParams();
     useEffect(() => {
-        // console.log(params.id);
         axios.get(`/news/${params.id}?_expand=category&_expand=role`).then(res => {
-            // console.log(res.data);
             setNewsInfo(res.data);
         });
-    }, [params])
+    }, [params.id]);
     const auditList = ['未审核', '审核中', '已通过', '未通过'];
     const publishList = ['未发布', '待发布', '已上线', '已下线'];
     const colors = ["black", "orange", "green", "red"];

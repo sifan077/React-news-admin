@@ -3,13 +3,13 @@ import {PageHeader, Steps, Button, Form, Input, Select, message, notification} f
 
 import style from './NewsAdd.module.css';
 import axios from "axios";
-import NewEditor from "../../../../compoments/news-manage/NewEditor";
+import NewEditor from "../../../../components/news-manage/NewEditor";
 import {useNavigate} from "react-router";
 
 const {Step} = Steps;
 const {Option} = Select;
 
-function NewsAdd(props) {
+function NewsAdd() {
     // 路由跳转
     const navigate = useNavigate();
     // 当前是第几部的状态
@@ -31,11 +31,10 @@ function NewsAdd(props) {
         if (current === 0) {
             // 检查表单时否填写完整
             NewsForm.current.validateFields().then(res => {
-                // console.log(res);
                 setFormInfo(res);
                 setCurrent(current + 1);
-            }).catch(err => {
-                console.log(err);
+            }).catch(() => {
+                message.error("请完善新闻标题和分类");
             });
         } else {
             // console.log(formInfo, content);

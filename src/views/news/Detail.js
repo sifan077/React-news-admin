@@ -7,14 +7,12 @@ import {Descriptions, PageHeader} from "antd";
 import moment from "moment";
 import {HeartTwoTone} from '@ant-design/icons';
 
-function Detail(props) {
+function Detail() {
     const navigate = useNavigate();
     const [newsInfo, setNewsInfo] = useState(null);
     const params = useParams();
     useEffect(() => {
-        // console.log(params.id);
         axios.get(`/news/${params.id}?_expand=category&_expand=role`).then(res => {
-            // console.log(res.data);
             setNewsInfo({
                 ...res.data,
                 view: res.data.view + 1,
@@ -25,7 +23,7 @@ function Detail(props) {
                 view: res.view + 1,
             });
         });
-    }, [params])
+    }, [params.id]);
 
     const handleStar = () => {
         setNewsInfo({

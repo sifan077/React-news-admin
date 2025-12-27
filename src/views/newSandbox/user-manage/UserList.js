@@ -6,11 +6,11 @@ import {
     ExclamationCircleOutlined
 } from '@ant-design/icons';
 import axios from "axios";
-import UserForm from "../../../compoments/user-manage/UserForm";
+import UserForm from "../../../components/user-manage/UserForm";
 
 const {confirm} = Modal;
 
-function UserList(props) {
+function UserList() {
     // 数据源，渲染前端
     const [dataSource, setDataSource] = useState([]);
     // 是否显示增加用户的弹窗
@@ -80,8 +80,6 @@ function UserList(props) {
             },
 
             onCancel() {
-                // console.log('Cancel');
-                console.log("取消删除了");
             },
         });
     }
@@ -95,7 +93,6 @@ function UserList(props) {
     const addFormOk = () => {
         // 获取表单数据
         addForm.current.validateFields().then(values => {
-            console.log(values);
             // post到后端，生成id，在设置dataSource,方便后面的删除和更新
             axios.post('/users', {
                 // 展开数据
@@ -259,8 +256,8 @@ function UserList(props) {
                 cancelText="取消"
                 onCancel={
                     () => {
-                        setIsUpdateVisible(false)
-                        setIsUpdateDisable(!isUpdateDisable)
+                        setIsUpdateVisible(false);
+                        setIsUpdateDisable(!isUpdateDisable);
                     }
                 }
                 onOk={() => updateFormOk()}>

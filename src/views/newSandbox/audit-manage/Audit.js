@@ -2,8 +2,7 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import {Button, notification, Table} from "antd";
 
-function Audit(props) {
-
+function Audit() {
     // roleId  1 超级管理员 2 区域 管理员 3 区域编辑
     const {roleId, region, username} = JSON.parse(localStorage.getItem("token"));
     // 数据源，渲染前端
@@ -18,12 +17,12 @@ function Audit(props) {
             const list = res.data;
             setDataSource(
                 roleObj[roleId] === "superAdmin" ? list : [
-                    ...list.filter((item) => item.username === username),
+                    ...list.filter((item) => item.author === username),
                     ...list.filter(
                         (item) =>
                             item.region === region &&
                             roleObj[item.roleId] === "editor" &&
-                            item.username !== username
+                            item.author !== username
                     )
                 ]
             );

@@ -10,7 +10,7 @@ import {
 
 const {confirm} = Modal;
 
-function RoleList(props) {
+function RoleList() {
     // 页面数据源
     const [dataSource, setDataSource] = useState([]);
     // 数据源提供的权限
@@ -35,8 +35,6 @@ function RoleList(props) {
             },
 
             onCancel() {
-                // console.log('Cancel');
-                console.log("取消删除了");
             },
         });
     }
@@ -45,7 +43,7 @@ function RoleList(props) {
         // 当前页面同步状态 + 后端同步
         // 遍历过滤当前页面的数据
         setDataSource(dataSource.filter(data => data.id !== item.id));
-        axios.delete(` /roles/${item.id}`);
+        axios.delete(`/roles/${item.id}`);
     }
 
     // 表格的表头
@@ -118,7 +116,7 @@ function RoleList(props) {
             return item;
         }));
         // put 请求修改后端
-        axios.patch(` /roles/${currentId}`, {
+        axios.patch(`/roles/${currentId}`, {
             rights: currentRights
         });
     }

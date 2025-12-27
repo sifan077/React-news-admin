@@ -9,7 +9,7 @@ import axios from "axios";
 
 const {confirm} = Modal;
 
-function RightList(props) {
+function RightList() {
     const [dataSource, setDataSource] = React.useState([]);
     useEffect(() => {
         axios.get("/rights?_embed=children").then(res => {
@@ -39,8 +39,6 @@ function RightList(props) {
             },
 
             onCancel() {
-                // console.log('Cancel');
-                console.log("取消删除了");
             },
         });
     }
@@ -51,7 +49,7 @@ function RightList(props) {
         if (item.grade === 1) {
             // 遍历过滤当前页面的数据
             setDataSource(dataSource.filter(data => data.id !== item.id));
-            axios.delete(` /rights/${item.id}`);
+            axios.delete(`/rights/${item.id}`);
         } else {
             // 获取删除的父级
             let list = dataSource.filter(data => data.id === item.rightId);
@@ -60,7 +58,7 @@ function RightList(props) {
             // 重新展开设置当前页面数据源，重新渲染页面
             setDataSource([...dataSource]);
 
-            axios.delete(` /children/${item.id}`);
+            axios.delete(`/children/${item.id}`);
         }
 
     }
@@ -72,9 +70,9 @@ function RightList(props) {
         setDataSource([...dataSource]);
         // 后端同步
         if (item.grade === 1) {
-            axios.put(` /rights/${item.id}`, item);
+            axios.put(`/rights/${item.id}`, item);
         } else {
-            axios.put(` /children/${item.id}`, item);
+            axios.put(`/children/${item.id}`, item);
         }
 
     }

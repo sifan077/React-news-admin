@@ -3,7 +3,7 @@ import {Button, notification, Table, Tag} from "antd";
 import axios from "axios";
 import {useNavigate} from "react-router";
 
-function AuditList(props) {
+function AuditList() {
     const navigate = useNavigate();
     const {username} = JSON.parse(localStorage.getItem('token'));
     const [dataSource, setDataSource] = React.useState([]);

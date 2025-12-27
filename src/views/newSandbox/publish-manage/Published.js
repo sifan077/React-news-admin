@@ -1,9 +1,9 @@
 import React from 'react';
-import NewsPublish from "../../../compoments/publish-manage/NewsPublish";
-import usePublish from "../../../compoments/publish-manage/usePublish";
+import NewsPublish from "../../../components/publish-manage/NewsPublish";
+import usePublish from "../../../components/publish-manage/usePublish";
 import {Button} from "antd";
 
-function Published(props) {
+function Published() {
     const {dataSource, handleSunset} = usePublish(2);
     return (
         <div>

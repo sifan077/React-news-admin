@@ -11,7 +11,7 @@ import {useNavigate} from "react-router";
 
 const {confirm} = Modal;
 
-function NewsDraft(props) {
+function NewsDraft() {
     const navigate = useNavigate();
     const [dataSource, setDataSource] = useState([]);
     const {username} = JSON.parse(localStorage.getItem("token"));
@@ -36,8 +36,6 @@ function NewsDraft(props) {
             },
 
             onCancel() {
-                // console.log('Cancel');
-                console.log("取消删除了");
             },
         });
     }

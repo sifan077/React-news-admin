@@ -1,9 +1,9 @@
 import React from 'react';
-import TopHeader from "../../compoments/sandbox/topHeader/TopHeader";
-import SideMenu from "../../compoments/sandbox/sideMenu/SideMenu";
+import TopHeader from "../../components/sandbox/topHeader/TopHeader";
+import SideMenu from "../../components/sandbox/sideMenu/SideMenu";
 
 import {Layout} from 'antd';
-import NewsRouter from "../../compoments/sandbox/newsRouter/NewsRouter";
+import NewsRouter from "../../components/sandbox/newsRouter/NewsRouter";
 
 import 'nprogress/nprogress.css';
 import './NewSandbox.css';
@@ -11,7 +11,7 @@ import './NewSandbox.css';
 const {Content} = Layout;
 
 
-function NewSandbox(props) {
+function NewSandbox() {
     return (
         <Layout>
             <SideMenu/>

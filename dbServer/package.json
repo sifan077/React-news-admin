@@ -2,5 +2,7 @@
   "scripts": {
     "start": "json-server db.json --port 8000"
   },
-  "dependencies": {}
+  "dependencies": {
+    "json-server": "^1.0.0-beta.3"
+  }
 }
