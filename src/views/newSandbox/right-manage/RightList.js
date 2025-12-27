@@ -34,13 +34,10 @@ function RightList(props) {
             // content: 'Some descriptions',
 
             onOk() {
-                // console.log('OK');
                 deleteMethod(item);
             },
 
             onCancel() {
-                // console.log('Cancel');
-                console.log("取消删除了");
             },
         });
     }

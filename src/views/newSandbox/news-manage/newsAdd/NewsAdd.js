@@ -1,15 +1,15 @@
-import React, {useEffect, useState, useRef} from 'react';
-import {PageHeader, Steps, Button, Form, Input, Select, message, notification} from 'antd';
+import React, {useEffect, useRef, useState} from 'react';
+import {Button, Form, Input, message, notification, PageHeader, Select, Steps} from 'antd';
 
 import style from './NewsAdd.module.css';
 import axios from "axios";
-import NewEditor from "../../../../compoments/news-manage/NewEditor";
-import {useNavigate} from "react-router";
+import NewEditor from "../../../../components/news-manage/NewEditor";
+import {useNavigate} from "react-router-dom";
 
 const {Step} = Steps;
 const {Option} = Select;
 
-function NewsAdd(props) {
+function NewsAdd() {
     // 路由跳转
     const navigate = useNavigate();
     // 当前是第几部的状态
@@ -31,16 +31,11 @@ function NewsAdd(props) {
         if (current === 0) {
             // 检查表单时否填写完整
             NewsForm.current.validateFields().then(res => {
-                // console.log(res);
                 setFormInfo(res);
                 setCurrent(current + 1);
-            }).catch(err => {
-                console.log(err);
             });
         } else {
-            // console.log(formInfo, content);
             if (content === "") {
-                //如果未输入
                 message.error("请输入新闻内容");
             } else {
                 setCurrent(current + 1);
@@ -80,7 +75,6 @@ function NewsAdd(props) {
     // 获取新闻类型列表
     useEffect(() => {
         axios.get("/categories").then(res => {
-            // console.log(res.data);
             setCategoryList(res.data);
         });
     }, []);
@@ -148,7 +142,6 @@ function NewsAdd(props) {
                 <div className={current === 1 ? "" : style.activate}>
                     <NewEditor getContext={(value) => {
                         // 通过回调获取编辑器的内容
-                        // console.log(value);
                         setContent(value);
                     }}/>
                 </div>

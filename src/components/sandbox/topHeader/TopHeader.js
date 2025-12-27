@@ -1,13 +1,11 @@
 import React from 'react';
 import {Avatar, Dropdown, Layout, Menu} from "antd";
-import {
-    UserOutlined,
-} from '@ant-design/icons';
-import {useNavigate} from "react-router";
+import {UserOutlined} from '@ant-design/icons';
+import {useNavigate} from "react-router-dom";
 
 const {Header} = Layout;
 
-function TopHeader(props) {
+function TopHeader() {
     const navigate = useNavigate();
     // 获取存储的token
     const users = localStorage.getItem("token");
